@@ -18,7 +18,7 @@ describeSuite({
     let relayVersion: number;
 
     beforeAll(async function () {
-      relayApi = context.polkadotJs({ apiName: "relay" });
+      relayApi = context.polkadotJs("relay");
       relayVersion = relayApi.consts.system.version.specVersion.toNumber();
 
       // TODO: Replace the below with new context methods when upgraded to moonwall v4
@@ -231,9 +231,7 @@ describeSuite({
       title: "should have matching indices for Utility.asDerivative in V2",
       minRtVersion: 2100,
       test: async function () {
-        const chainType = context
-          .polkadotJs({ apiName: "para" })
-          .consts.system.version.specName.toString();
+        const chainType = context.polkadotJs("para").consts.system.version.specName.toString();
         if (chainType !== "moonbase") {
           log(`Chain type ${chainType} does not support V2, skipping.`);
           return; // TODO: replace with skip() when added to vitest;
